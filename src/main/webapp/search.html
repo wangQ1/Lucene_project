@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#search").click(function(){
+				$.ajax({
+					url:'seek',
+					data:'keyword=' + $("input[name='keyword']").val(),
+					dataType:'json',
+					success:function(json){
+						$("div[name='content']").remove();
+						for(var i = 0; i < json.length; i++){
+							var html = "<div name='content'><h3>" + json[i].dishes + "</h3>" +
+										"<span>" + json[i].illustrate + "</span><p>" +
+										"</div>";
+							$("#result").append(html);
+						}
+					}
+				})
+			})
+		})
+	</script>
+</head>
+<body>
+	<div align="center">
+		<img src="bd_logo1.png" height="80" width="220"><br>
+		搜菜谱 <input type="text" name="keyword" style="width: 400px; height: 23px"
+		/><input id="search" type="button" value="百度一下" style="background-color: rgb(51,133,255);
+		border-color: rgb(51,133,255); color: white; height: 29px; width: 70px"/>
+		<div id="result" style="width: 800px">
+		</div>
+	</div>
+</body>
+</html>
